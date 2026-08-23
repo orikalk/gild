@@ -1,0 +1,64 @@
+[project]
+name = "gild"
+version = "0.1.0"
+description = "Renders orikalk ports from the palette"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+gild = "gild.main:main"
+
+[dependency-groups]
+dev = [
+    "commitizen>=4.18.0",
+    "pytest>=9.1.1",
+    "ruff>=0.16.4",
+    "rumdl>=0.2.60",
+    "ty>=0.0.74",
+]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.12"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "CPY",
+  "D1",
+  "D203",
+  "D213",
+  "COM812",
+  "COM819",
+  "D206",
+  "D300",
+  "E111",
+  "E114",
+  "E117",
+  "Q000",
+  "Q001",
+  "Q002",
+  "Q003",
+  "Q004",
+  "W191",
+  "S310",
+  "S701",
+  "T201",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101", "TC003", "INP001"]
+
+[tool.ty.terminal]
+error-on-warning = true
+
+[tool.rumdl]
+disable = [
+  "MD013",
+]
