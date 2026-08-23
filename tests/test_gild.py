@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from gild.main import contexts, render, split
 
 PALETTE = {
@@ -16,6 +18,11 @@ def test_split() -> None:
     meta, body = split(source='---\nfilename = "x"\n---\nbody\n')
     assert meta == {"filename": "x"}
     assert body == "body\n"
+
+
+def test_split_rejects_missing_front_matter() -> None:
+    with pytest.raises(ValueError, match="front matter"):
+        split(source="x\n---\na = 1\n---\nbody\n")
 
 
 def test_matrix() -> None:

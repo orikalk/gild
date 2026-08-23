@@ -44,7 +44,11 @@ def contexts(*, palette: dict, matrix: list[str]) -> list[dict]:
 
 
 def split(*, source: str) -> tuple[dict, str]:
-    _, header, body = source.split("---\n", 2)
+    prefix, marker, rest = source.partition("---\n")
+    header, marker, body = rest.partition("---\n")
+    if prefix or not marker:
+        msg = "template must start with --- front matter"
+        raise ValueError(msg)
     return tomllib.loads(header), body
 
 
