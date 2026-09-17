@@ -33,7 +33,7 @@ def contexts(*, palette: dict, matrix: list[str]) -> list[dict]:
     for key, theme in palette.items():
         if not isinstance(theme, dict):
             continue
-        base = {"theme": {"identifier": key, "name": theme["name"]}}
+        base = {"theme": {"identifier": key, "name": theme["name"], "stone": theme["stone"]}}
         if "mode" in matrix:
             for name in MODES:
                 mode = {"identifier": name, "name": name.capitalize()}

@@ -8,6 +8,7 @@ PALETTE = {
     "version": "0.0.0",
     "lapis": {
         "name": "Lapis",
+        "stone": "blue",
         "dark": {"colors": {"base": {"hex": "#000001"}}, "ansiColors": {}},
         "light": {"colors": {"base": {"hex": "#fffffe"}}, "ansiColors": {}},
     },

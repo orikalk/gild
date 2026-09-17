@@ -16,12 +16,12 @@ Every `templates/*.j2` starts with TOML front matter between `---` lines, then t
 ---
 filename = "themes/Orikalk {{ theme.name }}/Orikalk {{ theme.name }}.json"
 ---
-{"mPrimary": "{{ dark.yellow.hex }}"}
+{"mPrimary": "{{ dark[theme.stone].hex }}"}
 ```
 
-`filename` is itself a template. `matrix` defaults to `["theme"]`, one output per theme with `dark` and `light` in scope, each holding the 26 slots plus `ansi`. With `matrix = ["theme", "mode"]` there is one output per theme and mode, `mode.identifier` is `dark` or `light`, and the slots sit at the top level.
+`filename` is itself a template. `theme` carries `identifier`, `name` and `stone`, the slot name of the theme's headline colour. `matrix` defaults to `["theme"]`, one output per theme with `dark` and `light` in scope, each holding the slots plus `ansi`. With `matrix = ["theme", "mode"]` there is one output per theme and mode, `mode.identifier` is `dark` or `light`, and the slots sit at the top level.
 
-Slots carry `name`, `hex`, `rgb`, `hsl`, `oklch`, `accent`. `ansi.<colour>` carries `normal` and `bright`, each with `code` and the same colour fields.
+Slots carry `name` and `hex`. `ansi.<colour>` carries `normal` and `bright`, each with `hex` and `code`.
 
 ```sh
 uvx --from git+https://github.com/orikalk/gild gild render
