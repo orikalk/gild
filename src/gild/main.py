@@ -3,12 +3,11 @@ import json
 import sys
 import tomllib
 import urllib.request
-import zipfile
 from pathlib import Path
 
 from jinja2 import Environment, StrictUndefined
 
-RELEASE = "https://github.com/orikalk/palette/releases/download/{tag}/orikalk.zip"
+RELEASE = "https://raw.githubusercontent.com/orikalk/palette/{tag}/palette.json"
 CACHE = Path.home() / ".cache" / "orikalk" / "palette"
 MODES = ("dark", "light")
 
@@ -17,10 +16,7 @@ def fetch(*, tag: str) -> dict:
     path = CACHE / tag / "palette.json"
     if not path.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
-        archive = path.with_name("orikalk.zip")
-        urllib.request.urlretrieve(RELEASE.format(tag=tag), archive)
-        with zipfile.ZipFile(archive) as zf:
-            path.write_bytes(zf.read("palette.json"))
+        urllib.request.urlretrieve(RELEASE.format(tag=tag), path)
     return json.loads(path.read_text())
 
 
